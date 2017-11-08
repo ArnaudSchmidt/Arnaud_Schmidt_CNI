@@ -7,6 +7,9 @@
 
 using namespace std;
 
+void modifcarte(int& choix, CNI& cartamod);
+void remplicarte(CNI& cartaremplir);
+
 int main()
 {
 
@@ -43,35 +46,7 @@ int main()
 		if (inpt == 1)
 		{
 
-			cout << "Entrez un nom de famille (sans espaces)." << endl;
-			cin >> chaine;
-			carte.setNOM(chaine);
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-			cout << "Entrez un prenom (sans espace)." << endl;
-			cin >> chaine;
-			carte.setPRENOM(chaine);
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-			cout << "Entrez une date de naissance au format JJ/MM/AA." << endl;
-			cin >> chaine;
-			carte.setDDN(chaine);
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-			cout << "Entrez une adresse au format numero/type de rue (rue, place, avenue, etc.)/nom de la rue." << endl;
-			cin >> chaine;
-			carte.setADRESSE(chaine);
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-			cout << "Entrez une ville (sans espace)." << endl;
-			cin >> chaine;
-			carte.setVILLE(chaine);
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-			cout << "Entrez un code postal (exemple : 68000)." << endl;
-			cin >> nombre;
-			carte.setCP(nombre);
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			remplicarte(carte);
 
 			cin.clear();
 
@@ -118,64 +93,7 @@ int main()
 			if (BaseCNI.size() > 0)
 			{
 
-				cout << "Que souhaitez vous modifier ?" << endl;
-				cout << "Nom = 1 / Prenom = 2 / Date de naissance = 3 / Adresse = 4 / Ville = 5 / Code postal = 6" << endl;
-				cin >> inpt;
-
-				if (inpt == 1)
-				{
-
-					cout << "Nom actuel : " << carte.getNOM() << endl;
-					cout << "Entrez le nouveau nom." << endl;
-					cin >> chaine;
-					carte.setNOM(chaine);
-
-				}
-				else if (inpt == 2)
-				{
-
-					cout << "Prenom actuel : " << carte.getPRENOM() << endl;
-					cout << "Entrez le nouveau prenom." << endl;
-					cin >> chaine;
-					carte.setPRENOM(chaine);
-
-				}
-				else if (inpt == 3)
-				{
-
-					cout << "Date de naissance actuelle : " << carte.getDDN() << endl;
-					cout << "Entrez la nouvelle date de naissance." << endl;
-					cin >> chaine;
-					carte.setDDN(chaine);
-
-				}
-				else if (inpt == 4)
-				{
-
-					cout << "Adresse actuelle : " << carte.getADRESSE() << endl;
-					cout << "Entrez la nouvelle adresse." << endl;
-					cin >> chaine;
-					carte.setADRESSE(chaine);
-
-				}
-				else if (inpt == 5)
-				{
-
-					cout << "Ville actuelle : " << carte.getVILLE() << endl;
-					cout << "Entrez la nouvelle ville." << endl;
-					cin >> chaine;
-					carte.setVILLE(chaine);
-
-				}
-				else if (inpt == 6)
-				{
-
-					cout << "Code postal actuel : " << carte.getCP() << endl;
-					cout << "Entrez le nouveau code postal." << endl;
-					cin >> nombre;
-					carte.setCP(nombre);
-
-				}
+				modifcarte(inpt, carte);
 
 				//suppression de la derniere entree
 				BaseCNI.pop();
@@ -201,5 +119,117 @@ int main()
 	}
 
 	return 0;
+
+}
+
+
+void modifcarte(int& choix, CNI& cartamod)
+//But : permettre à l'utilisateur de modifier la dernière carte entrée dans la base
+//Entrée : l'input du joueur correspondant à l'élément à modifier ainsi que la carte à modifier
+//Sortie : l'élément de la carte est modifié
+{
+
+	string chaine = "";
+	int nombre = 0;
+
+	cout << "Que souhaitez vous modifier ?" << endl;
+	cout << "Nom = 1 / Prenom = 2 / Date de naissance = 3 / Adresse = 4 / Ville = 5 / Code postal = 6" << endl;
+	cin >> choix;
+
+	if (choix == 1)
+	{
+
+		cout << "Nom actuel : " << cartamod.getNOM() << endl;
+		cout << "Entrez le nouveau nom." << endl;
+		cin >> chaine;
+		cartamod.setNOM(chaine);
+
+	}
+	else if (choix == 2)
+	{
+
+		cout << "Prenom actuel : " << cartamod.getPRENOM() << endl;
+		cout << "Entrez le nouveau prenom." << endl;
+		cin >> chaine;
+		cartamod.setPRENOM(chaine);
+
+	}
+	else if (choix == 3)
+	{
+
+		cout << "Date de naissance actuelle : " << cartamod.getDDN() << endl;
+		cout << "Entrez la nouvelle date de naissance." << endl;
+		cin >> chaine;
+		cartamod.setDDN(chaine);
+
+	}
+	else if (choix == 4)
+	{
+
+		cout << "Adresse actuelle : " << cartamod.getADRESSE() << endl;
+		cout << "Entrez la nouvelle adresse." << endl;
+		cin >> chaine;
+		cartamod.setADRESSE(chaine);
+
+	}
+	else if (choix == 5)
+	{
+
+		cout << "Ville actuelle : " << cartamod.getVILLE() << endl;
+		cout << "Entrez la nouvelle ville." << endl;
+		cin >> chaine;
+		cartamod.setVILLE(chaine);
+
+	}
+	else if (choix == 6)
+	{
+
+		cout << "Code postal actuel : " << cartamod.getCP() << endl;
+		cout << "Entrez le nouveau code postal." << endl;
+		cin >> nombre;
+		cartamod.setCP(nombre);
+
+	}
+
+}
+
+void remplicarte(CNI& cartaremplir)
+//But : permettre à l'utilisateur de remplir une nouvelle carte d'identité
+//Entrée : la carte qui sert à stocker les informations
+//Sortie : une nouvelle carte ajoutée à la base
+{
+
+	string chaine = "";
+	int nombre = 0;
+
+	cout << "Entrez un nom de famille (sans espaces)." << endl;
+	cin >> chaine;
+	cartaremplir.setNOM(chaine);
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+	cout << "Entrez un prenom (sans espace)." << endl;
+	cin >> chaine;
+	cartaremplir.setPRENOM(chaine);
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+	cout << "Entrez une date de naissance au format JJ/MM/AA." << endl;
+	cin >> chaine;
+	cartaremplir.setDDN(chaine);
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+	cout << "Entrez une adresse au format numero/type de rue (rue, place, avenue, etc.)/nom de la rue." << endl;
+	cin >> chaine;
+	cartaremplir.setADRESSE(chaine);
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+	cout << "Entrez une ville (sans espace)." << endl;
+	cin >> chaine;
+	cartaremplir.setVILLE(chaine);
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+	cout << "Entrez un code postal (exemple : 68000)." << endl;
+	cin >> nombre;
+	cartaremplir.setCP(nombre);
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
 }
